@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ post.title }} — {{ site_title }}</title>
+  <link rel="stylesheet" href="{{ (base_url ~ '/assets/style.css') if base_url else '../assets/style.css' }}" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <p class="back">
+        <a href="{{ (base_url ~ '/index.html') if base_url else '../index.html' }}">← Back</a>
+      </p>
+      <h1 class="post-title">{{ post.title }}</h1>
+      <p class="sub">
+        <span class="src">{{ post.source }}</span>
+        <span class="dot">•</span>
+        <time datetime="{{ post.published.isoformat() }}">{{ post.published.strftime('%Y-%m-%d %H:%M UTC') }}</time>
+      </p>
+    </header>
+
+    {% if post.summary %}
+      <section class="content">
+        <p>{{ post.summary }}</p>
+      </section>
+    {% endif %}
+
+    {% if post.body_html %}
+      <section class="content">
+        {{ post.body_html|safe }}
+      </section>
+    {% endif %}
+
+    <section class="actions">
+      <a class="btn" href="{{ post.url }}" rel="noopener noreferrer" target="_blank">Open source</a>
+    </section>
+
+    <footer class="foot">
+      <p>Generated from RSS. This page does not scrape the full article.</p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ site_title }}</title>
+  <link rel="stylesheet" href="{{ (base_url ~ '/assets/style.css') if base_url else 'assets/style.css' }}" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>{{ site_title }}</h1>
+      <p class="desc">{{ site_description }}</p>
+      <p class="meta">Generated: {{ generated_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+    </header>
+
+    <section class="list">
+      {% if posts %}
+        {% for p in posts %}
+          <article class="card">
+            <h2 class="title">
+              <a href="{{ (base_url ~ '/posts/' ~ p.slug ~ '.html') if base_url else ('posts/' ~ p.slug ~ '.html') }}">{{ p.title }}</a>
+            </h2>
+            <p class="sub">
+              <span class="src">{{ p.source }}</span>
+              <span class="dot">•</span>
+              <time datetime="{{ p.published.isoformat() }}">{{ p.published.strftime('%Y-%m-%d') }}</time>
+            </p>
+            {% if p.summary %}
+              <p class="sum">{{ p.summary[:220] }}{% if p.summary|length > 220 %}…{% endif %}</p>
+            {% endif %}
+            <p class="out">
+              <a href="{{ p.url }}" rel="noopener noreferrer" target="_blank">Open source</a>
+            </p>
+          </article>
+        {% endfor %}
+      {% else %}
+        <p>No posts yet. Check your feeds in <code>site.config.json</code>.</p>
+      {% endif %}
+    </section>
+
+    <footer class="foot">
+      <p>One-shot lite. No ads. No tracking.</p>
+    </footer>
+  </main>
+</body>
+</html>
