@@ -1,1 +1,14 @@
-
+{
+  "site": {
+    "title": "AutoRSS Lite Demo",
+    "description": "One-shot demo: generate a simple site from one RSS item.",
+    "base_url": "https://YOURNAME.github.io/YOURREPO"
+  },
+  "rss_url": "https://hnrss.org/frontpage",
+  "contact_email": "you@example.com",
+  "generation": {
+    "model": "deepseek-chat",
+    "temperature": 0.7,
+    "max_tokens": 2200
+  }
+}
